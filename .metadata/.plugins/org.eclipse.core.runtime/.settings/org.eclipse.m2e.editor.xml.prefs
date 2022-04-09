@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+org.eclipse.m2e.editor.xml.templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="true" context\="org.eclipse.m2e.editor.xml.templates.contextType.\#document" deleted\="false" description\="" enabled\="false" name\="ps">public static void main(String args[]){&\#13;\r\n}</template></templates>

@@ -1,0 +1,40 @@
+package com.pro.webelement;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Whatsapp {
+	public static void main(String args[]) {
+		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://en-gb.facebook.com/");
+		WebElement x =driver.findElement(By.xpath("//a[contains(text(),'Create New Account')]"));
+		//getLocation():
+		Point e1 = x.getLocation();
+		System.out.println("location: "+e1);
+		//x_coordinate
+		int x_coordinate = x.getLocation().getX();
+		System.out.println("x_coordinate: "+x_coordinate);
+		//y_coordinate
+		int y_coordinate = x.getLocation().getY();
+		System.out.println("y_coordinate: "+y_coordinate);
+		
+        //getSize():
+		int size = x.getLocation().getY();
+		System.out.println("size: "+size);
+//		driver.findElement(By.name("firstname")).sendKeys("Nagesh");
+//		driver.findElement(By.name("lastname")).sendKeys("Kolhe");
+//		driver.findElement(By.name("reg_email__")).sendKeys("8007892026");
+//		driver.findElement(By.name("reg_passwd__")).sendKeys("N@ge$h2820");
+//		driver.findElement(By.name("birthday_day")).sendKeys("16");
+//		driver.findElement(By.name("birthday_month")).sendKeys("May");
+//		driver.findElement(By.name("birthday_year")).sendKeys("1999");
+//		driver.findElement(By.xpath("//input[@value='2']")).click();
+//		driver.findElement(By.name("websubmit")).click();
+		driver.close();
+	}
+}

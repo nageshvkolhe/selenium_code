@@ -1,0 +1,36 @@
+package com.pro.select;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class SelectClass_MethodsForMultiple {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_select_multiple");
+//		Thread.sleep(8000);
+//		driver.findElement(By.xpath("//*[contains(text(),'Close')]"));
+//		Thread.sleep(2000);
+//		driver.findElement(By.xpath("//body/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/section[1]/section[4]/section[1]/div[1]/div[1]/div[1]/input[1]")).click();
+		WebElement list = driver.findElement(By.id("cars"));
+		
+		Select s = new Select(list);
+		List<WebElement> options = s.getOptions();
+		int size = options.size();
+		System.out.println("Number of elements present inside the listbox is : "+ size);
+		s.selectByIndex(1);
+		s.selectByValue("volvo");
+		s.selectByVisibleText("Saab");
+		
+		List<WebElement> allSelectedOptions = s.getAllSelectedOptions();
+		int size2 = allSelectedOptions.size();
+		System.out.println("Number of items that is selected in the list box is : "+size2);
+
+	}
+}

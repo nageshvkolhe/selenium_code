@@ -1,0 +1,47 @@
+package com.pro.testng_dataprovider;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+public class Data_Provider_for_Sendkeys {
+	public WebDriver driver ; 
+
+	@Test(dataProvider="testdata")
+	public void TestChrome(String uname,String password){
+		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://en-gb.facebook.com/");
+		
+		driver.findElement(By.name("email")).clear();
+		driver.findElement(By.name("email")).sendKeys(uname);
+		driver.findElement(By.name("pass")).clear();
+		driver.findElement(By.name("pass")).sendKeys(password);
+	}
+	
+	@DataProvider(name="testdata")
+	public Object[][] TestDataFeed(){
+
+		// Create object array with 2 rows and 2 column- first parameter is row and second is //column
+		Object [][] facebookdata=new Object[6][6];
+
+		// Enter data to row 0 column 0
+		facebookdata[0][0]="username1@gmail.com";
+		facebookdata[0][1]="Password1";
+		facebookdata[1][0]="username2@gmail.com";
+		facebookdata[1][1]="Password2";
+		facebookdata[2][0]="username2@gmail.com";
+		facebookdata[2][1]="Password2";
+		facebookdata[3][0]="username2@gmail.com";
+		facebookdata[3][1]="Password2";
+		facebookdata[4][0]="username2@gmail.com";
+		facebookdata[4][1]="Password2";
+		facebookdata[5][0]="username2@gmail.com";
+		facebookdata[5][1]="Password2";
+		// return arrayobject to testscript
+		return facebookdata;
+	}
+}

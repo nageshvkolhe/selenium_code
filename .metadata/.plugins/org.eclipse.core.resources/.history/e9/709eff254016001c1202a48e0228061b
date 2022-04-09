@@ -1,0 +1,43 @@
+package com.pro.select;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class SelectClass_MethodsForMultiple {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
+		driver.get("http://techcanvass.com/Examples/multi-select.html");
+		Select select = new Select(driver.findElement(By.id("multiselect")));
+		
+		select.selectByIndex(1);
+		select.selectByValue("opel");
+		select.selectByVisibleText("Honda");
+		Thread.sleep(5000);
+
+		WebElement option = select.getFirstSelectedOption();
+		System.out.println("First Element :"+option.getText());
+
+
+		List<WebElement> options = select.getAllSelectedOptions();
+		for (WebElement option2 : options) {
+		System.out.println("All Selected : "+option2.getText()); 
+		}
+
+		select.deselectAll();
+		List<WebElement> options3 = select.getAllSelectedOptions();
+		for (WebElement option4 : options3) {
+		System.out.println("All Selected : "+option4.getText()); 
+		}
+		driver.quit();
+
+		}
+	}
+

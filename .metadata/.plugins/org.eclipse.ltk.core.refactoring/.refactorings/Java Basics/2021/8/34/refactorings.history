@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.javabasics.Constructor&apos; to &apos;A&apos;&#x0D;&#x0A;- Original project: &apos;Java Basics&apos;&#x0D;&#x0A;- Original element: &apos;com.javabasics.Constructor&apos;&#x0D;&#x0A;- Renamed element: &apos;com.javabasics.A&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Constructor&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.javabasics{Constructor.java[Constructor" matchStrategy="1" name="A" qualified="false" references="true" similarDeclarations="false" stamp="1629451976334" textual="false" version="1.0"/>
+</session>

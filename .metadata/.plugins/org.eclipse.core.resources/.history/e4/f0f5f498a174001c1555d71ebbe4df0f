@@ -1,0 +1,92 @@
+package com.selectbrowser;
+
+import java.io.File;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public class SelectBrowser {
+	static WebDriver driver;
+	static ChromeOptions options;
+
+	public static void chrome() {
+		System.setProperty("webdriver.chrome.driver","/Users/asus/eclipse-workspace/Selenium/drivers/chromedriver.exe");
+		ChromeOptions option = new ChromeOptions();
+		option.addArguments("--disable-notifications");
+		driver = new ChromeDriver(option);
+		driver.manage().window().maximize();
+	}
+
+	public static void opera(){
+		System.setProperty("webdriver.opera.driver","/Users/asus/eclipse-workspace/Selenium/drivers/operadriver.exe");
+		driver =new OperaDriver();
+		driver.manage().window().maximize();
+	}
+
+	public static void edge(){
+		System.setProperty("webdriver.edge.driver","/Users/asus/eclipse-workspace/Selenium/drivers/msedgedriver.exe");
+		driver =new EdgeDriver(); 
+		driver.manage().window().maximize();
+	}
+
+	public static void getconnection() {
+		driver.get("https://en-gb.facebook.com/");
+	}
+
+	public static void getTitle() {
+		getconnection();
+		System.out.println(driver.getTitle());
+		driver.close();
+	}
+
+	//	public static void createInstance(){
+	//		
+	//	//	WebDriver driver = new ChromeDriver();
+	//	
+	//	//	return driver;
+	//	}
+
+	static void takeScreenshot() {
+		getconnection();
+		driver.findElement(By.name("email")).sendKeys("nageshvkolhe@gmail.com");
+		driver.findElement(By.name("pass")).sendKeys("N@ge$h2019");
+		driver.findElement(By.name("login")).click();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		System.out.println("login successful!!!");
+		//********************************  
+		//		driver.get("https://www.facebook.com/events/birthdays/");
+		//		System.out.println("Events page openend successfyully!!!");
+		//	driver.findElement(By.name("Vasudev Purohit")).click();
+		//		driver.findElement(By.xpath("//body/div[@id='mount_0_0_P8']/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]")).click();
+		//***********************************
+
+		//***********************************
+		TakesScreenshot screenshot = (TakesScreenshot) driver;
+		File Sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+		File destinationFile = new File("./Screenshot/" +"facebook"+ System.currentTimeMillis() +".png");
+		try {
+			FileHandler.copy(Sourcefile, destinationFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(driver.getTitle());
+		//		driver.close();
+		//		driver.quit();
+	}
+}

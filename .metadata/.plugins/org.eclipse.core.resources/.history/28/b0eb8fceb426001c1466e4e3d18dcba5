@@ -1,0 +1,115 @@
+package pages;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+public class MainClass {
+	WebDriver driver;
+
+	@BeforeTest
+	public void setup()throws InterruptedException, IOException{
+		System.setProperty("webdriver.chrome.driver","./drivers1/chromedriver.exe");
+		ChromeOptions option = new ChromeOptions();
+		option.addArguments("--disable-notifications");
+		driver = new ChromeDriver(option);
+		driver.manage().window().maximize();
+		driver.get("https://en-gb.facebook.com/");	
+	}
+
+	@Test(priority = 1)
+	public void enter_RegisterDetails() throws InterruptedException, IOException {
+		RegisterClass rc = new RegisterClass(driver);
+		driver.findElement(By.xpath("//a[contains(text(),'Create New Account')]")).click();
+		Thread.sleep(5000);
+		File src=new File("./ExcelFile/FacebookData.xlsx");
+		// load file
+		FileInputStream fis = new FileInputStream(src);
+		// Load workbook
+		XSSFWorkbook wb =new XSSFWorkbook(fis);
+		// Load sheet- Here we are loading first Sheetonly...
+		XSSFSheet sh1 = wb.getSheetAt(0);
+		//get all rows in the sheet
+		int rowCount = sh1.getLastRowNum()-sh1.getFirstRowNum();
+		for(int i=1;i<=rowCount;i++ ) {
+			String fName = sh1.getRow(i).getCell(0).getStringCellValue();
+			String lName = sh1.getRow(i).getCell(1).getStringCellValue();
+			String email = sh1.getRow(i).getCell(2).getStringCellValue();
+			String password = sh1.getRow(i).getCell(3).getStringCellValue();
+			rc.enterFirstname(fName);
+			rc.enterLastname(lName);
+			rc.enterReg_email__(email);
+			rc.enterReg_passwd__(password);
+			//			String date = sh1.getRow(i).getCell(4).getStringCellValue();
+			//			String month = sh1.getRow(i).getCell(5).getStringCellValue();
+			//			String year = sh1.getRow(i).getCell(6).getStringCellValue();
+			//			RC.enterBirthday_day(date);
+			//			RC.enterBirthday_month(month);
+			//			RC.enterBirthday_year(year);
+		}
+		rc.enterBirthday_day("16");
+		rc.enterBirthday_month("May");
+		rc.enterBirthday_year("1999");
+		rc.enterGender();
+		//		rc.enterRepass("N@ge$h2019");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//img[@class=\"_8idr img\"]")).click();
+		Thread.sleep(2000);
+	}
+
+	@Test(priority = 2, dataProvider="testdata")
+	private void enterLoginDetails(String uname,String pass){
+		LoginClass lc = new LoginClass(driver);
+		lc.enterEmail(uname);
+		lc.enterPassword(pass);
+		lc.enterLogin();							
+		lc.waitExpl();
+	}
+
+	@DataProvider(name="testdata")
+	public Object[][] TestDataFeed(){
+		Object [][] facebookdata=new Object[1][2];
+		//Parameters ===> Column    //Data ---> Rows
+		facebookdata[0][0]="promagazine2020@gmail.com";
+		facebookdata[0][1]="N@ge$h2019";
+		return facebookdata;
+	}
+
+	@Test(priority = 3)
+	private void friends() {
+		FriendsClass fc = new FriendsClass(driver);
+		fc.enterFindFriend();
+		fc.waitExplBirthday();
+		fc.enterBirthdays();
+		fc.waitExplMagazine();
+		fc.enterMagazine();
+	}
+
+	@Test(priority = 4)
+	private void magazine() {
+		MagazineClass mc = new MagazineClass(driver);
+		mc.waitExplProfile();
+		mc.enterProfile();
+		mc.waitExplEdit();
+		mc.enterEdit();
+		mc.waitExplWorkplace();
+		mc.enterWorkplace();
+		//		mc.waitExplAdd();
+		//		mc.enterAdd("Pro Magazine pvt. ltd");
+	}
+
+	@AfterTest
+	public void closeConnection() {
+		driver.close();
+		driver.quit();
+	}
+}

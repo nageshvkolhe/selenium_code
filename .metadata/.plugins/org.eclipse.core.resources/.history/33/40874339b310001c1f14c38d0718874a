@@ -1,0 +1,19 @@
+package com.pro.frames;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Frame_Demo {
+	public static void main(String[] args) throws InterruptedException {
+	System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+	WebDriver driver = new ChromeDriver();
+	driver.manage().window().maximize();
+	driver.get("https://interestingengineering.com/top-12-oldest-websites-still-in-existence-today");
+	
+	driver.switchTo().frame(0);
+	driver.findElement(By.id("//[@name='goog_1665556771']")).sendKeys("b");
+//	driver.switchTo().defaultContent();
+//	driver.findElement(By.id("google_ads_iframe_/8095840,244556949/.2_A.38210.3_interestingengineering.com_tier1_0")).sendKeys("b");
+	}
+}

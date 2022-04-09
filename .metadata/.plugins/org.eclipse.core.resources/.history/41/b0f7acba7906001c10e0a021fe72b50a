@@ -1,0 +1,58 @@
+package pro.selenium.com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
+
+
+public class Basic {
+	public static void main(String args[]) throws InterruptedException  {
+			
+		System.setProperty("webdriver.chrome.driver", "/Users/asus/eclipse-workspace/Selenium/drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.amazon.in/");
+		System.out.println(driver.getTitle());
+		driver.close();
+		driver.quit();
+			
+//		System.setProperty("webdriver.edge.driver","/Users/asus/eclipse-workspace/Selenium/drivers/msedgedriver.exe");
+//		WebDriver driver3 =new EdgeDriver(); 
+//		driver3.get("https://www.amazon.in/");
+//		System.out.println(driver3.getTitle());
+//		driver3.close();
+//	    driver3.quit();
+//		    
+//		System.setProperty("webdriver.opera.driver","/Users/asus/eclipse-workspace/Selenium/drivers/operadriver.exe");
+//		WebDriver driver4 =new OperaDriver(); 
+//		driver4.get("https:/www.amazon.in/");
+//		System.out.println(driver4.getTitle());
+//		String currentUrl = driver4.getCurrentUrl();
+//		System.out.println("URL of the page is :"+ currentUrl);
+//		//System.out.println(driver4.getPageSource());
+//		System.out.println(driver4.getWindowHandle());
+//		System.out.println(driver4.getWindowHandles());
+//		driver4.close();
+//		driver4.quit();
+//		    
+//		System.setProperty("webdriver.gecko.driver","/Users/asus/eclipse-workspace/Selenium/drivers/geckodriver.exe");
+//		WebDriver driver1 = new FirefoxDriver();
+//		driver1.get("https://google.com/");
+//		Thread.sleep(3000);
+//		System.out.println(driver1.getTitle());
+//		driver1.close();
+//		driver1.quit();
+//		    
+//		System.setProperty("webdriver.ie.driver","/Users/asus/eclipse-workspace/Selenium/drivers/IEDriverServer.exe");
+//		WebDriver driver2 =new InternetExplorerDriver(); 
+//		driver2.get("https://www.amazon.in/");
+//		System.out.println(driver2.getTitle());
+//		driver2.close();
+//		driver2.quit();
+	}
+}
+
+

@@ -1,0 +1,65 @@
+package com.pro.select;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class SelectClass_MethodsForMultiple {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
+		driver.get("http://techcanvass.com/Examples/multi-select.html");
+		Select select = new Select(driver.findElement(By.id("multiselect")));
+		
+		List<WebElement> options = select.getOptions();
+		int size = options.size();
+		System.out.println("Number of elements present inside the listbox is : "+ size);
+		
+		boolean option4 = select.isMultiple();
+		System.out.println("Multi select listbox :"+option4);
+		
+		select.selectByIndex(1);
+		Thread.sleep(2000);
+		select.selectByIndex(0);
+		Thread.sleep(2000);
+		select.selectByValue("opel");
+		Thread.sleep(2000);
+		select.selectByVisibleText("Honda");
+		Thread.sleep(2000);
+
+		WebElement option = select.getFirstSelectedOption();
+		System.out.println("First Element :"+option.getText());
+
+		
+		List<WebElement> options1 = select.getAllSelectedOptions();
+		for (WebElement option2 : options1) {
+		System.out.println("All Selected : "+option2.getText()); 
+		}
+
+		
+		select.deselectByIndex(1);
+		Thread.sleep(2000);
+		select.deselectByValue("opel");
+		Thread.sleep(2000);
+		select.deselectByVisibleText("Honda");
+		Thread.sleep(2000);
+		
+		List<WebElement> options7 = select.getAllSelectedOptions();
+		for (WebElement option8 : options7) {
+		System.out.println("All Selected  after Deslected : "+option8.getText()); 
+		}
+		
+		select.deselectAll();
+		Thread.sleep(2000);
+		
+		driver.close());
+
+		}
+	}
+
